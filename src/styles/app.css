@@ -802,11 +802,31 @@ p {
 
 .board-meta {
   grid-area: meta;
+  display: flex;
+  gap: var(--s-2);
+  min-width: 0;
   color: var(--ink-2);
   font-size: var(--text-sm);
+  white-space: nowrap;
+}
+
+.board-composer {
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+}
+
+.board-proof {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: inherit;
+}
+
+.board-proof::before {
+  content: '·';
+  margin-right: var(--s-2);
+  font-family: var(--font-ui);
 }
 
 .board-score {
@@ -826,11 +846,9 @@ p {
   color: var(--ink-3);
 }
 
-.board-move[data-dir='up'] {
-  color: var(--leader);
-}
+.board-move[data-dir='up'],
 .board-move[data-dir='down'] {
-  color: var(--vermilion);
+  color: var(--ink-2);
 }
 
 .board-bar {
@@ -1237,28 +1255,3 @@ p {
   }
 }
 
-/* Wide screens: one-line leaderboard rows, so the red-black tree's upper
-   levels stay inside a 900px-tall first viewport. */
-@media (min-width: 1200px) and (min-height: 760px) {
-  .board-row {
-    grid-template-columns: 28px auto minmax(0, 1fr) auto;
-    grid-template-areas:
-      'rank title meta score'
-      'rank bar   bar  bar';
-    align-items: baseline;
-  }
-
-  .board-rank {
-    align-self: center;
-  }
-
-  .board-title {
-    max-width: 22ch;
-  }
-
-  .board-score {
-    flex-direction: row;
-    align-items: baseline;
-    gap: var(--s-2);
-  }
-}

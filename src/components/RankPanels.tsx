@@ -1,4 +1,4 @@
-import { useLayoutEffect, useMemo, useRef } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 import type { Candidate, RankingSnapshot } from '../engine/types';
 import { useReducedMotion, useSnapshot } from '../lib/hooks';
 import { SONGS } from '../library/songs';
@@ -150,8 +150,12 @@ function BoardRow({
     <li className="board-row" ref={refCallback} data-lead={rank === 0}>
       <span className="board-rank" aria-label={`Rank ${rank + 1}`}>{rank + 1}</span>
       <span className="board-title" title={song?.title}>{song?.title ?? `Song ${candidate.song}`}</span>
+      {/* The proof (where it matched, how many edits) never clips; the composer gives way. */}
       <span className="board-meta">
-        {song?.composer} · from note {candidate.offset + 1} · {edits === 0 ? 'exact contour' : `${edits} ${edits === 1 ? 'edit' : 'edits'}`}
+        <span className="board-composer" title={song?.composer}>{song?.composer}</span>
+        <span className="board-proof">
+          note {candidate.offset + 1} · {edits === 0 ? 'exact' : `${edits} ${edits === 1 ? 'edit' : 'edits'}`}
+        </span>
       </span>
       <span className="board-score" title="Contour edit distance blended with how closely each interval's size matches">
         {(candidate.score * 100).toFixed(1)}
@@ -204,7 +208,7 @@ function placeTree(snapshot: RankingSnapshot, width: number, height: number): Pl
 }
 
 const TREE_MIN_W = 360;
-const TREE_H = 190;
+const LEVEL_GAP = 34;
 // Every node stays big enough to carry its rank; a wide tree widens the
 // drawing (which the SVG then scales down) instead of shrinking the nodes.
 const NODE_PITCH = 19;
@@ -213,7 +217,22 @@ export function RankingTreePanel() {
   const snap = useSnapshot();
   const ranking = snap.ranking;
   const treeW = Math.max(TREE_MIN_W, (ranking?.size ?? 0) * NODE_PITCH);
-  const placed = useMemo(() => (ranking ? placeTree(ranking, treeW, TREE_H) : []), [ranking, treeW]);
+  const TREE_H = 28 + Math.max(0, (ranking?.height ?? 1) - 1) * LEVEL_GAP;
+  const placed = useMemo(() => (ranking ? placeTree(ranking, treeW, TREE_H) : []), [ranking, treeW, TREE_H]);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const userScrolled = useRef(false);
+
+  // When the tree is wider than its column, open it centred on the root so the
+  // balance is visible; once the viewer scrolls it themselves, leave it alone.
+  const rootX = placed.find((n) => n.parent === null)?.x;
+  useLayoutEffect(() => {
+    const el = scrollRef.current;
+    if (!el || rootX === undefined || userScrolled.current) return;
+    el.scrollLeft = Math.max(0, rootX - el.clientWidth / 2);
+  }, [rootX]);
+  useEffect(() => {
+    if (!ranking?.size) userScrolled.current = false;
+  }, [ranking?.size]);
   const radius = placed.length > 12 ? 8.5 : 12;
   const stats = snap.outcome?.rankStats;
   const lead = snap.outcome?.top[0]?.song;
@@ -230,7 +249,15 @@ export function RankingTreePanel() {
           and the tree rebalances with rotations and recolouring in O(log n).
         </p>
       ) : (
-        <div className="rbt-scroll" tabIndex={0} aria-label="Red-black tree, scrolls horizontally when wide">
+        <div
+          className="rbt-scroll"
+          ref={scrollRef}
+          tabIndex={0}
+          aria-label="Red-black tree, scrolls horizontally when wide"
+          onPointerDown={() => (userScrolled.current = true)}
+          onWheel={() => (userScrolled.current = true)}
+          onKeyDown={() => (userScrolled.current = true)}
+        >
           {/* Drawn at 1:1 so ranks stay legible; a wide tree scrolls sideways. */}
           <svg className="rbt" width={treeW + 4} height={TREE_H + 24} viewBox={`-2 -2 ${treeW + 4} ${TREE_H + 24}`} role="img" aria-label={`Red-black tree with ${placed.length} candidates, height ${ranking?.height}`}>
             {placed.map((node) =>

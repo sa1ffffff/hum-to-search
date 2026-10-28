@@ -124,7 +124,9 @@ export function TriePanel() {
     }
     ctx.textAlign = 'start';
 
-    const dense = to.totalWeight > 220;
+    // Phones get lighter marks so the lead's phrase stays the only heavy line.
+    const compact = size.width < 440;
+    const dense = to.totalWeight > 220 || compact;
     const lineWidth = dense ? 0.8 : 1.4;
 
     // Resolve every node's drawn position for this frame.
@@ -203,7 +205,7 @@ export function TriePanel() {
     // Dead ends recede; torn branches stay legible; the followed track is
     // ruled by ink weight: lead 3px, the rest of the top five 2px, other
     // surviving paths a light hairline.
-    strokeEdges((n) => n.state === VisitState.Pruned, colors.vermilion, [], dense ? 0.55 : 0.85, dense ? 1.25 : 2);
+    strokeEdges((n) => n.state === VisitState.Pruned, colors.vermilion, [], dense ? 0.55 : 0.85, compact ? 1 : dense ? 1.25 : 2);
     strokeEdges((n) => n.state !== VisitState.Pruned && !n.live, colors['ink-3'], [], dense ? 0.35 : 0.6);
     strokeEdges((n) => n.live && !ranks.has(n.id), colors.leader, [], 0.45);
     strokeEdges((n) => (ranks.get(n.id) ?? -1) > 0, colors.leader, [], 1, 2);
@@ -211,6 +213,7 @@ export function TriePanel() {
 
     // Matches are punched slots; torn ends get a small cross-cut; a stub whose
     // dead-end subtree was folded trails a short bar sized by what it hides.
+    const notched = new Set<number>();
     for (const node of to.nodes) {
       const me = next.get(node.id)!;
       if (node.folded > 0 && !node.live) {
@@ -222,13 +225,16 @@ export function TriePanel() {
       if (node.state === VisitState.Matched) {
         ctx.fillStyle = colors.leader;
         ctx.beginPath();
-        ctx.roundRect(me.x - 4, me.y - (dense ? 1.5 : 2.5), 8, dense ? 3 : 5, 1.5);
+        if (compact) ctx.rect(me.x - 0.75, me.y - 2.5, 1.5, 5);
+        else ctx.roundRect(me.x - 4, me.y - (dense ? 1.5 : 2.5), 8, dense ? 3 : 5, 1.5);
         ctx.fill();
-      } else if (node.state === VisitState.Pruned) {
+      } else if (node.state === VisitState.Pruned && !(compact && notched.has(node.parentId))) {
+        // On phones sibling tears share one notch per parent.
+        notched.add(node.parentId);
         // A torn end: a notch cut back into the strip.
         const r = dense ? 2 : 3.5;
         ctx.strokeStyle = colors.vermilion;
-        ctx.lineWidth = dense ? 1.25 : 2;
+        ctx.lineWidth = compact ? 1.5 : dense ? 1.25 : 2;
         ctx.beginPath();
         ctx.moveTo(me.x + r, me.y - r);
         ctx.lineTo(me.x, me.y);
