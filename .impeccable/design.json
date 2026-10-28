@@ -1,0 +1,583 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-28T19:38:43.222Z",
+  "title": "Design System: Hum-to-Search",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Roll Paper",
+        "canonical": "oklch(0.932 0.03 86)",
+        "tonalRamp": [
+          "oklch(0.15 0.018 86)",
+          "oklch(0.26 0.018 86)",
+          "oklch(0.38 0.03 86)",
+          "oklch(0.49 0.03 86)",
+          "oklch(0.61 0.03 86)",
+          "oklch(0.72 0.03 86)",
+          "oklch(0.84 0.03 86)",
+          "oklch(0.95 0.018 86)"
+        ]
+      },
+      "paper-hi": {
+        "role": "neutral",
+        "displayName": "Roll Sheet",
+        "canonical": "oklch(0.958 0.022 88)",
+        "tonalRamp": [
+          "oklch(0.15 0.013 88)",
+          "oklch(0.26 0.013 88)",
+          "oklch(0.38 0.022 88)",
+          "oklch(0.49 0.022 88)",
+          "oklch(0.61 0.022 88)",
+          "oklch(0.72 0.022 88)",
+          "oklch(0.84 0.022 88)",
+          "oklch(0.95 0.013 88)"
+        ]
+      },
+      "paper-lo": {
+        "role": "neutral",
+        "displayName": "Manila Page",
+        "canonical": "oklch(0.893 0.036 83)",
+        "tonalRamp": [
+          "oklch(0.15 0.022 83)",
+          "oklch(0.26 0.022 83)",
+          "oklch(0.38 0.036 83)",
+          "oklch(0.49 0.036 83)",
+          "oklch(0.61 0.036 83)",
+          "oklch(0.72 0.036 83)",
+          "oklch(0.84 0.036 83)",
+          "oklch(0.95 0.022 83)"
+        ]
+      },
+      "paper-edge": {
+        "role": "neutral",
+        "displayName": "Paper Edge",
+        "canonical": "oklch(0.84 0.042 80)",
+        "tonalRamp": [
+          "oklch(0.15 0.025 80)",
+          "oklch(0.26 0.025 80)",
+          "oklch(0.38 0.042 80)",
+          "oklch(0.49 0.042 80)",
+          "oklch(0.61 0.042 80)",
+          "oklch(0.72 0.042 80)",
+          "oklch(0.84 0.042 80)",
+          "oklch(0.95 0.025 80)"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "oklch(0.77 0.04 76)",
+        "tonalRamp": [
+          "oklch(0.15 0.024 76)",
+          "oklch(0.26 0.024 76)",
+          "oklch(0.38 0.04 76)",
+          "oklch(0.49 0.04 76)",
+          "oklch(0.61 0.04 76)",
+          "oklch(0.72 0.04 76)",
+          "oklch(0.84 0.04 76)",
+          "oklch(0.95 0.024 76)"
+        ]
+      },
+      "rule-strong": {
+        "role": "neutral",
+        "displayName": "Strong Hairline",
+        "canonical": "oklch(0.62 0.04 70)",
+        "tonalRamp": [
+          "oklch(0.15 0.024 70)",
+          "oklch(0.26 0.024 70)",
+          "oklch(0.38 0.04 70)",
+          "oklch(0.49 0.04 70)",
+          "oklch(0.61 0.04 70)",
+          "oklch(0.72 0.04 70)",
+          "oklch(0.84 0.04 70)",
+          "oklch(0.95 0.024 70)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Roll Ink",
+        "canonical": "oklch(0.25 0.022 55)",
+        "tonalRamp": [
+          "oklch(0.15 0.013 55)",
+          "oklch(0.26 0.013 55)",
+          "oklch(0.38 0.022 55)",
+          "oklch(0.49 0.022 55)",
+          "oklch(0.61 0.022 55)",
+          "oklch(0.72 0.022 55)",
+          "oklch(0.84 0.022 55)",
+          "oklch(0.95 0.013 55)"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Ink 2",
+        "canonical": "oklch(0.4 0.03 60)",
+        "tonalRamp": [
+          "oklch(0.15 0.018 60)",
+          "oklch(0.26 0.018 60)",
+          "oklch(0.38 0.03 60)",
+          "oklch(0.49 0.03 60)",
+          "oklch(0.61 0.03 60)",
+          "oklch(0.72 0.03 60)",
+          "oklch(0.84 0.03 60)",
+          "oklch(0.95 0.018 60)"
+        ]
+      },
+      "ink-3": {
+        "role": "neutral",
+        "displayName": "Ink 3",
+        "canonical": "oklch(0.5 0.032 64)",
+        "tonalRamp": [
+          "oklch(0.15 0.019 64)",
+          "oklch(0.26 0.019 64)",
+          "oklch(0.38 0.032 64)",
+          "oklch(0.49 0.032 64)",
+          "oklch(0.61 0.032 64)",
+          "oklch(0.72 0.032 64)",
+          "oklch(0.84 0.032 64)",
+          "oklch(0.95 0.019 64)"
+        ]
+      },
+      "hole": {
+        "role": "neutral",
+        "displayName": "Punched Hole",
+        "canonical": "oklch(0.22 0.02 50)",
+        "tonalRamp": [
+          "oklch(0.15 0.012 50)",
+          "oklch(0.26 0.012 50)",
+          "oklch(0.38 0.02 50)",
+          "oklch(0.49 0.02 50)",
+          "oklch(0.61 0.02 50)",
+          "oklch(0.72 0.02 50)",
+          "oklch(0.84 0.02 50)",
+          "oklch(0.95 0.012 50)"
+        ]
+      },
+      "walnut": {
+        "role": "neutral",
+        "displayName": "Walnut",
+        "canonical": "oklch(0.285 0.03 48)",
+        "tonalRamp": [
+          "oklch(0.15 0.018 48)",
+          "oklch(0.26 0.018 48)",
+          "oklch(0.38 0.03 48)",
+          "oklch(0.49 0.03 48)",
+          "oklch(0.61 0.03 48)",
+          "oklch(0.72 0.03 48)",
+          "oklch(0.84 0.03 48)",
+          "oklch(0.95 0.018 48)"
+        ]
+      },
+      "walnut-hi": {
+        "role": "neutral",
+        "displayName": "Walnut Highlight",
+        "canonical": "oklch(0.355 0.034 48)",
+        "tonalRamp": [
+          "oklch(0.15 0.02 48)",
+          "oklch(0.26 0.02 48)",
+          "oklch(0.38 0.034 48)",
+          "oklch(0.49 0.034 48)",
+          "oklch(0.61 0.034 48)",
+          "oklch(0.72 0.034 48)",
+          "oklch(0.84 0.034 48)",
+          "oklch(0.95 0.02 48)"
+        ]
+      },
+      "walnut-lo": {
+        "role": "neutral",
+        "displayName": "Walnut Edge",
+        "canonical": "oklch(0.235 0.026 48)",
+        "tonalRamp": [
+          "oklch(0.15 0.016 48)",
+          "oklch(0.26 0.016 48)",
+          "oklch(0.38 0.026 48)",
+          "oklch(0.49 0.026 48)",
+          "oklch(0.61 0.026 48)",
+          "oklch(0.72 0.026 48)",
+          "oklch(0.84 0.026 48)",
+          "oklch(0.95 0.016 48)"
+        ]
+      },
+      "on-walnut": {
+        "role": "neutral",
+        "displayName": "On Walnut",
+        "canonical": "oklch(0.94 0.026 86)",
+        "tonalRamp": [
+          "oklch(0.15 0.016 86)",
+          "oklch(0.26 0.016 86)",
+          "oklch(0.38 0.026 86)",
+          "oklch(0.49 0.026 86)",
+          "oklch(0.61 0.026 86)",
+          "oklch(0.72 0.026 86)",
+          "oklch(0.84 0.026 86)",
+          "oklch(0.95 0.016 86)"
+        ]
+      },
+      "on-walnut-2": {
+        "role": "neutral",
+        "displayName": "On Walnut Muted",
+        "canonical": "oklch(0.8 0.032 80)",
+        "tonalRamp": [
+          "oklch(0.15 0.019 80)",
+          "oklch(0.26 0.019 80)",
+          "oklch(0.38 0.032 80)",
+          "oklch(0.49 0.032 80)",
+          "oklch(0.61 0.032 80)",
+          "oklch(0.72 0.032 80)",
+          "oklch(0.84 0.032 80)",
+          "oklch(0.95 0.019 80)"
+        ]
+      },
+      "leader": {
+        "role": "primary",
+        "displayName": "Roll-Leader Green",
+        "canonical": "oklch(0.47 0.095 163)",
+        "tonalRamp": [
+          "oklch(0.15 0.057 163)",
+          "oklch(0.26 0.057 163)",
+          "oklch(0.38 0.095 163)",
+          "oklch(0.49 0.095 163)",
+          "oklch(0.61 0.095 163)",
+          "oklch(0.72 0.095 163)",
+          "oklch(0.84 0.095 163)",
+          "oklch(0.95 0.057 163)"
+        ]
+      },
+      "leader-hi": {
+        "role": "primary",
+        "displayName": "Roll-Leader Green Bright",
+        "canonical": "oklch(0.55 0.1 163)",
+        "tonalRamp": [
+          "oklch(0.15 0.06 163)",
+          "oklch(0.26 0.06 163)",
+          "oklch(0.38 0.1 163)",
+          "oklch(0.49 0.1 163)",
+          "oklch(0.61 0.1 163)",
+          "oklch(0.72 0.1 163)",
+          "oklch(0.84 0.1 163)",
+          "oklch(0.95 0.06 163)"
+        ]
+      },
+      "leader-soft": {
+        "role": "primary",
+        "displayName": "Roll-Leader Green Wash",
+        "canonical": "oklch(0.87 0.045 160)",
+        "tonalRamp": [
+          "oklch(0.15 0.027 160)",
+          "oklch(0.26 0.027 160)",
+          "oklch(0.38 0.045 160)",
+          "oklch(0.49 0.045 160)",
+          "oklch(0.61 0.045 160)",
+          "oklch(0.72 0.045 160)",
+          "oklch(0.84 0.045 160)",
+          "oklch(0.95 0.027 160)"
+        ]
+      },
+      "vermilion": {
+        "role": "secondary",
+        "displayName": "Torn Vermilion",
+        "canonical": "oklch(0.555 0.17 36)",
+        "tonalRamp": [
+          "oklch(0.15 0.102 36)",
+          "oklch(0.26 0.102 36)",
+          "oklch(0.38 0.17 36)",
+          "oklch(0.49 0.17 36)",
+          "oklch(0.61 0.17 36)",
+          "oklch(0.72 0.17 36)",
+          "oklch(0.84 0.17 36)",
+          "oklch(0.95 0.102 36)"
+        ]
+      },
+      "vermilion-soft": {
+        "role": "secondary",
+        "displayName": "Vermilion Wash",
+        "canonical": "oklch(0.88 0.05 40)",
+        "tonalRamp": [
+          "oklch(0.15 0.03 40)",
+          "oklch(0.26 0.03 40)",
+          "oklch(0.38 0.05 40)",
+          "oklch(0.49 0.05 40)",
+          "oklch(0.61 0.05 40)",
+          "oklch(0.72 0.05 40)",
+          "oklch(0.84 0.05 40)",
+          "oklch(0.95 0.03 40)"
+        ]
+      },
+      "gold": {
+        "role": "tertiary",
+        "displayName": "Confidence Gold",
+        "canonical": "oklch(0.72 0.13 80)",
+        "tonalRamp": [
+          "oklch(0.15 0.078 80)",
+          "oklch(0.26 0.078 80)",
+          "oklch(0.38 0.13 80)",
+          "oklch(0.49 0.13 80)",
+          "oklch(0.61 0.13 80)",
+          "oklch(0.72 0.13 80)",
+          "oklch(0.84 0.13 80)",
+          "oklch(0.95 0.078 80)"
+        ]
+      },
+      "gold-deep": {
+        "role": "tertiary",
+        "displayName": "Confidence Gold Deep",
+        "canonical": "oklch(0.52 0.1 70)",
+        "tonalRamp": [
+          "oklch(0.15 0.06 70)",
+          "oklch(0.26 0.06 70)",
+          "oklch(0.38 0.1 70)",
+          "oklch(0.49 0.1 70)",
+          "oklch(0.61 0.1 70)",
+          "oklch(0.72 0.1 70)",
+          "oklch(0.84 0.1 70)",
+          "oklch(0.95 0.06 70)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Locked-in Title",
+        "purpose": "The locked-in song title only, condensed to width 76%."
+      },
+      "headline": {
+        "displayName": "Confidence Word",
+        "purpose": "The confidence state word before lock-in."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Brand name on the rail; drawer title."
+      },
+      "panel-label": {
+        "displayName": "Panel Label",
+        "purpose": "Uppercase condensed panel headings; each panel's only heading."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Default text with tabular numerals."
+      },
+      "body-sm": {
+        "displayName": "Body Small",
+        "purpose": "Meta lines, legends, field labels."
+      },
+      "code": {
+        "displayName": "Code",
+        "purpose": "Mono for interval code, scores, ranks and note names only."
+      }
+    },
+    "shadows": [
+      {
+        "name": "sheet",
+        "value": "0 0 0 1px var(--paper-edge), 0 10px 22px -16px oklch(0.25 0.02 55 / 0.45)",
+        "purpose": "Roll and trie paper sheets resting on the page."
+      },
+      {
+        "name": "drawer",
+        "value": "-18px 0 40px -24px oklch(0.25 0.02 55 / 0.5)",
+        "purpose": "Library drawer leading edge, over a oklch(0.2 0.02 50 / 0.28) backdrop."
+      },
+      {
+        "name": "focus-ring",
+        "value": "0 0 0 2px var(--paper), 0 0 0 4px var(--leader)",
+        "purpose": "All focus-visible states on paper; walnut tabs use inset 0 0 0 2px var(--leader-hi)."
+      },
+      {
+        "name": "slot-outline",
+        "value": "inset 0 0 0 1.5px var(--hole)",
+        "purpose": "Unpunched slots; rank boxes use var(--rule-strong)."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.23, 1, 0.32, 1)",
+        "purpose": "All state changes and data movement."
+      },
+      {
+        "name": "dur-fast",
+        "value": "140ms",
+        "purpose": "Control hover and color changes."
+      },
+      {
+        "name": "dur",
+        "value": "220ms",
+        "purpose": "Meter fill and score bars; meter slots stagger 12ms each."
+      },
+      {
+        "name": "press",
+        "value": "scale(0.97), 120ms ease-out",
+        "purpose": "Button active state."
+      },
+      {
+        "name": "punch",
+        "value": "scale 0.6 to 1 with fade, 260ms ease-out",
+        "purpose": "Interval slot appearing."
+      },
+      {
+        "name": "tree-move",
+        "value": "transform 320ms ease-out",
+        "purpose": "Red-black node rebalancing."
+      },
+      {
+        "name": "drawer",
+        "value": "translateX 260ms ease-out",
+        "purpose": "Library drawer enter and exit."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "1ms",
+        "purpose": "All animations and transitions collapse under prefers-reduced-motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "compact",
+        "value": "480px"
+      },
+      {
+        "name": "tabs-scroll",
+        "value": "720px"
+      },
+      {
+        "name": "tabs-wrap",
+        "value": "980px"
+      },
+      {
+        "name": "single-column",
+        "value": "1080px"
+      },
+      {
+        "name": "labels-wide",
+        "value": "1180px"
+      },
+      {
+        "name": "type-step-up",
+        "value": "1200px"
+      },
+      {
+        "name": "hints",
+        "value": "1400px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The start action on the walnut rail: roll-sheet paper, never an accent fill.",
+      "html": "<div class=\"ds-rail\"><button class=\"ds-btn ds-btn-primary\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 4.5v15l12-7.5z\"/></svg>Play demo hum</button></div>",
+      "css": ".ds-rail{background:var(--walnut);padding:12px;display:inline-flex} .ds-btn{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 16px;border-radius:var(--radius-control);border:1px solid transparent;font-family:var(--font-ui);font-weight:600;cursor:pointer;transition:background-color 140ms var(--ease-out),border-color 140ms var(--ease-out),transform 120ms var(--ease-out)} .ds-btn:active{transform:scale(.97)} .ds-btn:focus-visible{outline:none;box-shadow:var(--focus-ring)} .ds-btn-primary{background:var(--paper-hi);color:var(--ink);border-color:var(--paper-edge)} .ds-btn-primary:hover{background:var(--paper)}"
+    },
+    {
+      "name": "Ghost Button (rail)",
+      "kind": "button",
+      "refersTo": "button-ghost-dark",
+      "description": "Secondary actions on walnut: New search, Library.",
+      "html": "<div class=\"ds-rail\"><button class=\"ds-btn ds-btn-ghost-dark\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 5h16 M4 10h16 M4 15h10 M4 20h7\"/></svg>Library</button></div>",
+      "css": ".ds-rail{background:var(--walnut);padding:12px;display:inline-flex} .ds-btn{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 16px;border-radius:var(--radius-control);border:1px solid transparent;font-family:var(--font-ui);font-weight:600;cursor:pointer;transition:background-color 140ms var(--ease-out),border-color 140ms var(--ease-out),transform 120ms var(--ease-out)} .ds-btn:active{transform:scale(.97)} .ds-btn:focus-visible{outline:none;box-shadow:var(--focus-ring)} .ds-btn-ghost-dark{background:transparent;color:var(--on-walnut);border-color:var(--walnut-hi)} .ds-btn-ghost-dark:hover{background:var(--walnut-hi)}"
+    },
+    {
+      "name": "Ghost Button (paper)",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary actions on paper: octave shift, drawer close, song actions.",
+      "html": "<button class=\"ds-btn ds-btn-ghost\">Hum this</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 16px;border-radius:var(--radius-control);border:1px solid transparent;font-family:var(--font-ui);font-weight:600;cursor:pointer;transition:background-color 140ms var(--ease-out),border-color 140ms var(--ease-out),transform 120ms var(--ease-out)} .ds-btn:active{transform:scale(.97)} .ds-btn:focus-visible{outline:none;box-shadow:var(--focus-ring)} .ds-btn-ghost{background:transparent;color:var(--ink);border-color:var(--rule)} .ds-btn-ghost:hover{background:var(--paper);border-color:var(--rule-strong)}"
+    },
+    {
+      "name": "Source Tabs",
+      "kind": "nav",
+      "refersTo": "source-tab",
+      "description": "Input-source tabs cut from the roll paper on the walnut rail.",
+      "html": "<div class=\"ds-tabs\" role=\"tablist\"><button class=\"ds-tab\" role=\"tab\" aria-selected=\"false\">Microphone</button><button class=\"ds-tab\" role=\"tab\" aria-selected=\"true\">Demo hum</button><button class=\"ds-tab\" role=\"tab\" aria-selected=\"false\">Keys</button></div>",
+      "css": ".ds-tabs{display:flex;align-items:flex-end;gap:2px;background:var(--walnut);padding:8px 12px 0} .ds-tab{height:44px;padding:0 16px;border:0;border-radius:var(--radius-control) var(--radius-control) 0 0;background:transparent;color:var(--on-walnut-2);font-family:var(--font-ui);font-weight:520;cursor:pointer;transition:background-color 140ms var(--ease-out),color 140ms var(--ease-out)} .ds-tab[aria-selected=true]{background:var(--paper-lo);color:var(--ink)} .ds-tab[aria-selected=false]:hover{background:var(--walnut-hi);color:var(--on-walnut)} .ds-tab:focus-visible{outline:none;box-shadow:inset 0 0 0 2px var(--leader-hi)}"
+    },
+    {
+      "name": "Search Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Paper field used in the library drawer; selects share the treatment.",
+      "html": "<input class=\"ds-input\" placeholder=\"Search songs\" />",
+      "css": ".ds-input{width:280px;height:38px;padding:0 12px;border:1px solid var(--rule);border-radius:var(--radius-control);background:var(--paper-hi);color:var(--ink);font-family:var(--font-ui);font-size:var(--text-base)} .ds-input::placeholder{color:var(--ink-3)} .ds-input:focus-visible{outline:none;box-shadow:var(--focus-ring)}"
+    },
+    {
+      "name": "Interval Code (punched slots)",
+      "kind": "custom",
+      "refersTo": "step-slot",
+      "description": "The signature data mark: each interval punched as a hole; S is an unpunched outline.",
+      "html": "<div class=\"ds-steps\"><span class=\"ds-step\">S</span><span class=\"ds-step ds-punched\">U</span><span class=\"ds-step ds-punched\">U</span><span class=\"ds-step\">S</span><span class=\"ds-step ds-punched\">D</span><span class=\"ds-step ds-punched\">D</span></div>",
+      "css": ".ds-steps{display:flex;gap:4px} .ds-step{display:inline-grid;place-items:center;width:24px;height:28px;border-radius:var(--radius-slot);font-family:var(--font-mono);font-size:var(--text-xs);font-weight:650;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--hole);animation:ds-punch 260ms var(--ease-out) both} .ds-punched{background:var(--hole);color:var(--paper-hi);box-shadow:none} @keyframes ds-punch{from{transform:scale(.6);opacity:0}}"
+    },
+    {
+      "name": "Confidence Meter",
+      "kind": "custom",
+      "refersTo": "meter-slot-on",
+      "description": "24 gold slots with threshold ticks; the only place gold appears. Shown locked in.",
+      "html": "<div class=\"ds-meter\"><i class=\"on\"></i><i class=\"on\"></i><i class=\"on\"></i><i class=\"on\"></i><i class=\"on\"></i><i class=\"on\"></i><i class=\"on\"></i><i class=\"on\"></i><i class=\"on\"></i><i class=\"on\"></i><i class=\"on\"></i><i class=\"on\"></i><i class=\"on\"></i><i class=\"on\"></i><i class=\"on\"></i><i class=\"on\"></i><i class=\"on\"></i><i class=\"on\"></i><i class=\"\"></i><i class=\"\"></i><i class=\"\"></i><i class=\"\"></i><i class=\"\"></i><i class=\"\"></i></div>",
+      "css": ".ds-meter{position:relative;display:grid;grid-template-columns:repeat(24,1fr);gap:3px;height:18px;width:300px} .ds-meter i{border-radius:2px;background:var(--paper-edge);transition:background-color 220ms var(--ease-out)} .ds-meter i.on{background:var(--gold);box-shadow:inset 0 0 0 1px var(--gold-deep)} .ds-meter::before,.ds-meter::after{content:'';position:absolute;top:-4px;bottom:-4px;width:1px;background:var(--rule-strong)} .ds-meter::before{left:40%} .ds-meter::after{left:70%}"
+    },
+    {
+      "name": "Leaderboard Row",
+      "kind": "custom",
+      "refersTo": "rank-slot-lead",
+      "description": "Ruled row with rank slot, title, mono score and score bar; the lead is leader green.",
+      "html": "<ol class=\"ds-board\"><li class=\"ds-row ds-lead\"><span class=\"ds-rank\">1</span><span class=\"ds-title\">Ode to Joy</span><span class=\"ds-score\">98.5</span><span class=\"ds-meta\">Ludwig van Beethoven</span><span class=\"ds-bar\"><span style=\"transform:scaleX(.98)\"></span></span></li><li class=\"ds-row\"><span class=\"ds-rank\">2</span><span class=\"ds-title\">Yankee Doodle</span><span class=\"ds-score\">83.1</span><span class=\"ds-meta\">Traditional (American)</span><span class=\"ds-bar\"><span style=\"transform:scaleX(.83)\"></span></span></li></ol>",
+      "css": ".ds-board{list-style:none;margin:0;padding:0;width:360px;font-family:var(--font-ui);color:var(--ink)} .ds-row{display:grid;grid-template-columns:28px minmax(0,1fr) auto;grid-template-areas:'rank title score' 'rank meta score' 'rank bar bar';align-items:center;gap:0 12px;padding:8px 0;border-bottom:1px solid var(--rule)} .ds-rank{grid-area:rank;align-self:start;display:grid;place-items:center;width:24px;height:24px;border-radius:var(--radius-slot);box-shadow:inset 0 0 0 1.5px var(--rule-strong);font-family:var(--font-mono);font-size:var(--text-xs);font-weight:650} .ds-lead .ds-rank{background:var(--leader);color:var(--paper-hi);box-shadow:none} .ds-title{grid-area:title;font-weight:620;font-size:var(--text-md)} .ds-meta{grid-area:meta;color:var(--ink-2);font-size:var(--text-sm)} .ds-score{grid-area:score;font-family:var(--font-mono);font-size:var(--text-sm)} .ds-bar{grid-area:bar;height:3px;margin-top:4px;border-radius:2px;background:var(--paper-edge);overflow:hidden} .ds-bar span{display:block;height:100%;background:var(--ink-2);transform-origin:left;transition:transform 220ms var(--ease-out)} .ds-lead .ds-bar span{background:var(--leader)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Player-Piano Roll",
+    "overview": "The hum is a punched music roll and the search is that roll being read. The page is manila roll paper held in a dark walnut roll box: a walnut rail across the top carries the name, the input-source tabs and the start control; everything below sits on paper. Data is drawn as punched slots: notes on the roll, the interval code under it, the leaderboard ranks, the confidence meter and the piano keys' pressed state all use the same small rectangular hole. The search structures are the interface, so the trie and red-black tree get canvas and SVG space equal to the result itself.\n\nDensity is instrument-panel, not marketing: a 4px spacing base, 13-16px text, hairline rules between areas, and no cards. Because the app is projected in a classroom, the type ramp steps up one notch above 1200px and status is never carried by color alone (red nodes are outlined, black nodes filled; pruned branches end in a torn tick; rank changes carry an arrow).\n\nThe shipped build rejects the dark neon audio dashboard with glowing waveform and card grid. Surfaces are flat paper; depth appears only where a physical sheet sits on the page or a drawer slides over it.",
+    "keyCharacteristics": [
+      "Manila paper ground, walnut shell rail, black punched holes.",
+      "Three roll-leader inks, each with exactly one job: green follows, vermilion tears, gold measures confidence.",
+      "One variable grotesque (Archivo) whose width axis condenses headings; mono only for interval code and numbers.",
+      "Hairline rules and paper edges divide areas; no cards, no glass.",
+      "Strong ease-out motion for state changes; everything collapses under reduced motion."
+    ],
+    "rules": [
+      {
+        "name": "The One Job Rule",
+        "body": "Each leader ink has a single meaning: green = followed, vermilion = red node or torn branch, gold = confidence. Never borrow one for decoration, emphasis or a different status.",
+        "section": "colors"
+      },
+      {
+        "name": "The Paper Sheet Rule",
+        "body": "Anything drawn on (roll, trie, white keys, inputs) sits on `paper-hi`, one step paler than the `paper-lo` page, so punched `hole` marks hit full contrast.",
+        "section": "colors"
+      },
+      {
+        "name": "The Mono Is Data Rule",
+        "body": "JetBrains Mono appears only on values the engine produced or consumes: intervals, notes, numbers, keyboard keys. Prose and labels stay in Archivo.",
+        "section": "typography"
+      },
+      {
+        "name": "The Width Axis Rule",
+        "body": "Headings get hierarchy from width (condensed) and weight (620-680), not from large size jumps; only the locked-in title is allowed past 1.5rem.",
+        "section": "typography"
+      },
+      {
+        "name": "The Paper Sheet Lift Rule",
+        "body": "Only sheets (roll, trie) and the drawer cast shadows. Panels, rows, buttons and inputs stay flat and are separated by hairlines.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** read every color from the CSS custom properties, including canvas drawing; the roll and trie canvases sample `--paper-hi`, `--leader`, `--vermilion` and the rest at runtime.",
+      "**Do** keep each leader ink to its one job (green followed, vermilion red/torn, gold confidence).",
+      "**Do** draw new data as punched slots on `paper-hi` sheets, with mono labels.",
+      "**Do** divide areas with 1px `rule` hairlines and panel heads, not containers.",
+      "**Do** use `cubic-bezier(0.23, 1, 0.32, 1)` at 140ms for control state changes and 220-320ms for data movement, and keep the reduced-motion collapse.",
+      "**Do** pair every color-coded status with a second cue: outline vs fill, an arrow, a torn tick, or a text label.",
+      "**Do** step type up one notch above 1200px for projection."
+    ],
+    "donts": [
+      "**Don't** use the dark neon audio dashboard: no glowing waveform, no dark canvas, no card grid.",
+      "**Don't** wrap panels in cards or frosted glass; only roll and trie sheets and the drawer get a shadow.",
+      "**Don't** fill buttons with leader green, vermilion or gold; actions stay paper or walnut.",
+      "**Don't** set prose, labels or headings in JetBrains Mono.",
+      "**Don't** add a second sans or a display face; condense Archivo with its width axis instead."
+    ]
+  }
+}
