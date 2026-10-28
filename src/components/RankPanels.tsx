@@ -16,9 +16,10 @@ export function ConfidencePanel() {
   const lit = Math.round(confidence * SLOTS);
   const locked = confidence >= LOCKED && lead !== undefined;
 
+  const leadSong = lead ? SONGS[lead.song] : undefined;
   let word = 'Waiting for notes';
   if (outcome && !lead) word = 'No match yet';
-  else if (lead && locked) word = SONGS[lead.song]?.title ?? 'Locked in';
+  else if (lead && locked) word = leadSong?.title ?? 'Locked in';
   else if (lead && confidence >= NARROWING) word = 'Narrowing down';
   else if (lead) word = 'Listening';
 
@@ -28,8 +29,16 @@ export function ConfidencePanel() {
         <h2 className="panel-title" id="confidence-title">Confidence</h2>
         <span className="panel-meta">{locked ? 'locked in' : 'score gap between first and second'}</span>
       </div>
-      <div className="confidence-state">
-        <p className="confidence-word" aria-live="polite">{word}</p>
+      {/* Locked in, the song is announced the way a roll's leader label names its tune. */}
+      <div className="confidence-state" data-locked={locked}>
+        <div>
+          <p className="confidence-word" aria-live="polite">{word}</p>
+          {locked && leadSong && (
+            <p className="confidence-credit">
+              {leadSong.composer} · {leadSong.year}
+            </p>
+          )}
+        </div>
         <span className="confidence-number">{Math.round(confidence * 100)}%</span>
       </div>
       <div
@@ -40,15 +49,18 @@ export function ConfidencePanel() {
         aria-valuemin={0}
         aria-valuemax={100}
         aria-valuenow={Math.round(confidence * 100)}
+        aria-valuetext={`${Math.round(confidence * 100)}%, ${locked ? 'locked in' : confidence >= NARROWING ? 'narrowing' : 'listening'}`}
+        style={{ '--narrowing': `${NARROWING * 100}%`, '--locked': `${LOCKED * 100}%` } as React.CSSProperties}
       >
         {Array.from({ length: SLOTS }, (_, i) => (
           <span key={i} className="meter-slot" data-on={i < lit} style={{ '--i': i } as React.CSSProperties} />
         ))}
       </div>
+      {/* Labels sit at the thresholds the words above actually use. */}
       <div className="meter-scale" aria-hidden="true">
-        <span>listening</span>
-        <span>narrowing</span>
-        <span>locked in</span>
+        <span style={{ left: 0 }}>listening</span>
+        <span style={{ left: `${NARROWING * 100}%` }}>narrowing</span>
+        <span style={{ left: `${LOCKED * 100}%` }}>locked in</span>
       </div>
     </section>
   );
@@ -116,11 +128,6 @@ export function LeaderboardPanel() {
           ))}
         </ol>
       )}
-      {outcome && top.length > 0 && (
-        <p className="board-foot">
-          Score blends the contour edit distance with how closely each interval's size matches.
-        </p>
-      )}
     </section>
   );
 }
@@ -142,11 +149,11 @@ function BoardRow({
   return (
     <li className="board-row" ref={refCallback} data-lead={rank === 0}>
       <span className="board-rank" aria-label={`Rank ${rank + 1}`}>{rank + 1}</span>
-      <span className="board-title">{song?.title ?? `Song ${candidate.song}`}</span>
+      <span className="board-title" title={song?.title}>{song?.title ?? `Song ${candidate.song}`}</span>
       <span className="board-meta">
         {song?.composer} · from note {candidate.offset + 1} · {edits === 0 ? 'exact contour' : `${edits} ${edits === 1 ? 'edit' : 'edits'}`}
       </span>
-      <span className="board-score">
+      <span className="board-score" title="Contour edit distance blended with how closely each interval's size matches">
         {(candidate.score * 100).toFixed(1)}
         <span className="board-move" data-dir={moved}>
           {moved === 'up' && <><Icon name="up" size={12} /> {previousRank - rank}</>}
@@ -196,14 +203,18 @@ function placeTree(snapshot: RankingSnapshot, width: number, height: number): Pl
   return placed;
 }
 
-const TREE_W = 360;
+const TREE_MIN_W = 360;
 const TREE_H = 190;
+// Every node stays big enough to carry its rank; a wide tree widens the
+// drawing (which the SVG then scales down) instead of shrinking the nodes.
+const NODE_PITCH = 19;
 
 export function RankingTreePanel() {
   const snap = useSnapshot();
   const ranking = snap.ranking;
-  const placed = useMemo(() => (ranking ? placeTree(ranking, TREE_W, TREE_H) : []), [ranking]);
-  const radius = placed.length > 24 ? 5 : placed.length > 12 ? 8 : 12;
+  const treeW = Math.max(TREE_MIN_W, (ranking?.size ?? 0) * NODE_PITCH);
+  const placed = useMemo(() => (ranking ? placeTree(ranking, treeW, TREE_H) : []), [ranking, treeW]);
+  const radius = placed.length > 12 ? 8.5 : 12;
   const stats = snap.outcome?.rankStats;
   const lead = snap.outcome?.top[0]?.song;
 
@@ -219,28 +230,31 @@ export function RankingTreePanel() {
           and the tree rebalances with rotations and recolouring in O(log n).
         </p>
       ) : (
-        <svg className="rbt" viewBox={`0 0 ${TREE_W} ${TREE_H + 20}`} role="img" aria-label={`Red-black tree with ${placed.length} candidates, height ${ranking?.height}`}>
-          {placed.map((node) =>
-            node.parent ? (
-              <line key={`e${node.song}`} className="rbt-edge" x1={node.parent.x} y1={node.parent.y} x2={node.x} y2={node.y} />
-            ) : null,
-          )}
-          {placed.map((node) => (
-            <g
-              key={node.song}
-              className="rbt-node"
-              data-red={node.red}
-              data-lead={node.song === lead}
-              style={{ transform: `translate(${node.x}px, ${node.y}px)` }}
-            >
-              <title>
-                {`${SONGS[node.song]?.title ?? node.song}: score ${(node.score * 100).toFixed(1)}, ${node.red ? 'red' : 'black'}`}
-              </title>
-              <circle r={radius} />
-              {radius >= 8 && <text>{node.rank + 1}</text>}
-            </g>
-          ))}
-        </svg>
+        <div className="rbt-scroll" tabIndex={0} aria-label="Red-black tree, scrolls horizontally when wide">
+          {/* Drawn at 1:1 so ranks stay legible; a wide tree scrolls sideways. */}
+          <svg className="rbt" width={treeW + 4} height={TREE_H + 24} viewBox={`-2 -2 ${treeW + 4} ${TREE_H + 24}`} role="img" aria-label={`Red-black tree with ${placed.length} candidates, height ${ranking?.height}`}>
+            {placed.map((node) =>
+              node.parent ? (
+                <line key={`e${node.song}`} className="rbt-edge" x1={node.parent.x} y1={node.parent.y} x2={node.x} y2={node.y} />
+              ) : null,
+            )}
+            {placed.map((node) => (
+              <g
+                key={node.song}
+                className="rbt-node"
+                data-red={node.red}
+                data-lead={node.song === lead}
+                style={{ transform: `translate(${node.x}px, ${node.y}px)` }}
+              >
+                <title>
+                  {`${SONGS[node.song]?.title ?? node.song}: score ${(node.score * 100).toFixed(1)}, ${node.red ? 'red' : 'black'}`}
+                </title>
+                <circle r={radius} />
+                <text>{node.rank + 1}</text>
+              </g>
+            ))}
+          </svg>
+        </div>
       )}
       <div className="rbt-stats">
         <div>
@@ -264,7 +278,7 @@ export function RankingTreePanel() {
         <p className="rbt-note">
           Last note: {stats.inserts} {stats.inserts === 1 ? 'insert' : 'inserts'}, {stats.erases}{' '}
           {stats.erases === 1 ? 'erase' : 'erases'}, {stats.recolors} {stats.recolors === 1 ? 'recolour' : 'recolours'}.
-          Numbers in nodes are ranks.
+          Numbers in nodes are ranks; red nodes are drawn hollow.
         </p>
       )}
     </section>

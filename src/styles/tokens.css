@@ -66,3 +66,13 @@
 
   --shadow-lift: 0 1px 1px oklch(0.25 0.02 55 / 0.08), 0 6px 18px -6px oklch(0.25 0.02 55 / 0.28);
 }
+
+/* Projected in a classroom: one step larger on wide screens. */
+@media (min-width: 1200px) {
+  :root {
+    --text-xs: 0.8125rem;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-md: 1.0625rem;
+  }
+}

@@ -17,7 +17,7 @@ OWN-WORLD: Manila roll-paper ground, dark walnut-ink shell rail, punched slots a
 
 STORY: Viewer sees notes punched as they are hummed, sees the trie's paths stay inked or tear away, sees the leaderboard reorder and the meter fill; believes the structures did the identification; can run it themselves.
 
-FIRST VIEWPORT: Top bar: name, input source segmented control (Microphone / Demo hum / Keys), primary Start button. Left 2/3: the Roll (tracker-bar waveform strip above a scrolling pitch roll with punched slots, interval code row under it), Trie explorer below. Right 1/3: Leaderboard top 5, confidence meter, red-black tree view.
+FIRST VIEWPORT: Top bar: name, input source tabs (Microphone / Demo hum / Keys / Recording; Recording added because the deliverables include a demo recording and graders need a non-mic path that uses real audio), primary Start button. Left 2/3: the Roll (tracker-bar waveform strip above a scrolling pitch roll with punched slots, interval code row under it), Trie explorer below. Right 1/3: Confidence first (locked in, it becomes the roll-leader label naming the tune, the payoff a projected room reads first), then Leaderboard top 5, then the red-black tree. The roll sheet is --paper-hi, paler than the manila page, so punched holes keep full contrast.
 
 FORM: Player-piano roll, my top-ranked grounded candidate (1 of 7), chosen as IMPECCABLE'S PICK. seed:7cdd3cf087279b85
 

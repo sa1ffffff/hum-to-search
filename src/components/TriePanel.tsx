@@ -2,7 +2,13 @@ import { useEffect, useMemo, useRef } from 'react';
 import { VisitState } from '../engine/types';
 import { easeOut, fitCanvas, readTokens } from '../lib/canvas';
 import { useAnimationFrame, useElementSize, useReducedMotion, useSnapshot } from '../lib/hooks';
-import { layoutTrace, type TrieLayout } from './trieLayout';
+import { SONGS } from '../library/songs';
+import { layoutTrace, rankedPaths, type TrieLayout } from './trieLayout';
+
+// Each song's contour as engine step codes (Down 0, Same 1, Up 2).
+const SONG_STEPS = SONGS.map((song) =>
+  song.notes.slice(1).map((note, i) => Math.sign(note.midi - song.notes[i]!.midi) + 1),
+);
 
 const TOKENS = ['paper-hi', 'paper-lo', 'paper-edge', 'rule', 'ink', 'ink-2', 'ink-3', 'hole', 'leader', 'vermilion'] as const;
 const TWEEN_MS = 420;
@@ -31,6 +37,17 @@ export function TriePanel() {
   const monoFont = useMemo(() => getComputedStyle(document.documentElement).getPropertyValue('--font-mono'), []);
   const outcome = snap.outcome;
   const layout = useMemo(() => (outcome ? layoutTrace(outcome.trace) : null), [outcome]);
+  // Which drawn nodes carry the top candidates' matched phrases: the lead's
+  // path is ruled heaviest so it reads across a projected room.
+  const pathRank = useMemo(() => {
+    if (!layout || !outcome) return new Map<number, number>();
+    const phrases = outcome.top.map((c) => ({
+      steps: (SONG_STEPS[c.song] ?? []).slice(c.offset, c.offset + c.length),
+    }));
+    return rankedPaths(layout, phrases);
+  }, [layout, outcome]);
+  const pathRankRef = useRef(pathRank);
+  pathRankRef.current = pathRank;
 
   const current = useRef(new Map<number, Drawn>());
   const frame = useRef<Frame>({ from: new Map(), to: null, leaving: [], start: 0 });
@@ -152,14 +169,16 @@ export function TriePanel() {
 
     // Edges, drawn as roll strips: across, then down, then across.
     const layoutNodes = to.nodes;
+    const ranks = pathRankRef.current;
     const strokeEdges = (
       filter: (n: (typeof layoutNodes)[number]) => boolean,
       color: string,
       dash: number[] = [],
       weight = 1,
+      width = lineWidth,
     ) => {
       ctx.strokeStyle = color;
-      ctx.lineWidth = lineWidth;
+      ctx.lineWidth = width;
       ctx.setLineDash(dash);
       ctx.beginPath();
       for (const node of layoutNodes) {
@@ -181,9 +200,14 @@ export function TriePanel() {
     };
 
     // Dead ends recede; the paths that still lead to a song carry the ink.
-    strokeEdges((n) => n.state === VisitState.Pruned, colors.vermilion, [2, 3], dense ? 0.45 : 0.8);
+    // Dead ends recede; torn branches stay legible; the followed track is
+    // ruled by ink weight: lead 3px, the rest of the top five 2px, other
+    // surviving paths a light hairline.
+    strokeEdges((n) => n.state === VisitState.Pruned, colors.vermilion, [], dense ? 0.55 : 0.85, dense ? 1.25 : 2);
     strokeEdges((n) => n.state !== VisitState.Pruned && !n.live, colors['ink-3'], [], dense ? 0.35 : 0.6);
-    strokeEdges((n) => n.live, colors.leader, [], 1);
+    strokeEdges((n) => n.live && !ranks.has(n.id), colors.leader, [], 0.45);
+    strokeEdges((n) => (ranks.get(n.id) ?? -1) > 0, colors.leader, [], 1, 2);
+    strokeEdges((n) => ranks.get(n.id) === 0, colors.leader, [], 1, 3);
 
     // Matches are punched slots; torn ends get a small cross-cut; a stub whose
     // dead-end subtree was folded trails a short bar sized by what it hides.
@@ -200,12 +224,15 @@ export function TriePanel() {
         ctx.beginPath();
         ctx.roundRect(me.x - 4, me.y - (dense ? 1.5 : 2.5), 8, dense ? 3 : 5, 1.5);
         ctx.fill();
-      } else if (node.state === VisitState.Pruned && !dense) {
+      } else if (node.state === VisitState.Pruned) {
+        // A torn end: a notch cut back into the strip.
+        const r = dense ? 2 : 3.5;
         ctx.strokeStyle = colors.vermilion;
-        ctx.lineWidth = 1.2;
+        ctx.lineWidth = dense ? 1.25 : 2;
         ctx.beginPath();
-        ctx.moveTo(me.x - 2, me.y - 3);
-        ctx.lineTo(me.x + 2, me.y + 3);
+        ctx.moveTo(me.x + r, me.y - r);
+        ctx.lineTo(me.x, me.y);
+        ctx.lineTo(me.x + r, me.y + r);
         ctx.stroke();
       }
     }
@@ -274,9 +301,10 @@ export function TriePanel() {
         )}
       </div>
       <div className="legend">
+        <span className="legend-item"><span className="swatch swatch-matched swatch-lead" /> current lead's phrase</span>
         <span className="legend-item"><span className="swatch swatch-matched" /> leads to a match</span>
         <span className="legend-item"><span className="swatch swatch-alive" /> within budget, no match below (subtree folded)</span>
-        <span className="legend-item"><span className="swatch swatch-pruned" /> pruned: over budget</span>
+        <span className="legend-item"><span className="swatch swatch-pruned" /> torn off: over budget</span>
         {truncated && <span>Showing the first {outcome!.trace.node.length.toLocaleString()} visited nodes.</span>}
       </div>
     </section>

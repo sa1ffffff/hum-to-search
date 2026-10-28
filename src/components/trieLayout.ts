@@ -4,6 +4,8 @@ export interface LaidOutNode {
   id: number;
   parentId: number; // 0 = trie root
   depth: number;
+  /** Edge label from the parent (StepCode). */
+  step: number;
   state: number;
   /** True when this node or a descendant matched: the branch is still alive. */
   live: boolean;
@@ -37,6 +39,29 @@ const WEIGHT = { live: 1, alive: 0.5, pruned: 0.3 };
  * bottom in drawing order: each leaf takes the next slot and each parent sits
  * midway between its first and last child. Linear passes, O(V).
  */
+/**
+ * Rank (0 = lead) of the best candidate whose matched phrase runs through each
+ * drawn node, found by walking each candidate's steps down from the root.
+ */
+export function rankedPaths(
+  layout: TrieLayout,
+  candidates: readonly { steps: readonly number[] }[],
+): Map<number, number> {
+  const child = new Map<number, number>();
+  for (const node of layout.nodes) child.set(node.parentId * 4 + node.step, node.id);
+  const rankOf = new Map<number, number>();
+  candidates.forEach(({ steps }, rank) => {
+    let parent = 0;
+    for (const step of steps) {
+      const id = child.get(parent * 4 + step);
+      if (id === undefined) break;
+      if (!rankOf.has(id)) rankOf.set(id, rank);
+      parent = id;
+    }
+  });
+  return rankOf;
+}
+
 export function layoutTrace(trace: TrieTrace): TrieLayout {
   const count = trace.node.length;
   const all: LaidOutNode[] = new Array(count);
@@ -48,6 +73,7 @@ export function layoutTrace(trace: TrieTrace): TrieLayout {
       id,
       parentId: trace.parent[i]!,
       depth: trace.depth[i]!,
+      step: trace.step[i]!,
       state: trace.state[i]!,
       live: trace.state[i] === VisitState.Matched,
       folded: 0,
